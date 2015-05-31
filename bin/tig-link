@@ -1,0 +1,5 @@
+#!/bin/bash
+
+app_start=$HOME/src/tig-link/index.js
+
+node "$app_start"
