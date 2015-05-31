@@ -1,9 +1,11 @@
 {
   "name": "tig-link",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "The node.js web counterpart to tig CLI tools.",
   "main": "index.js",
-  "directories": ["bin"],
+  "directories": [
+    "bin"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/cchamberlain/tig-link.git"
