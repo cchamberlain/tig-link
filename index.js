@@ -1,5 +1,4 @@
-var util = require('util'),
-  http = require('http');
+var http = require('http');
 
 http.createServer(function (req, res) {
   res.writeHead(200, {'Content-Type': 'text/plain'});
@@ -7,5 +6,4 @@ http.createServer(function (req, res) {
   res.end();
 }).listen(3000);
 
-/* server started */
-util.puts('> tig-link running on port 3000');
+console.log('tig-link started on 3000.');

@@ -1,5 +1,7 @@
 #!/bin/bash
 
-app_start=$HOME/src/tig-link/index.js
+app_root="$HOME/src/tig-link"
 
-node "$app_start"
+pushd "$app_root"
+  node index
+popd
