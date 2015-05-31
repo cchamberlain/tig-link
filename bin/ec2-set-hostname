@@ -1,0 +1,60 @@
+#!/bin/bash
+# chkconfig: 2345 95 20
+# processname: ec2-set-hostname
+# description: Manually change the hostname when the instance starts
+
+# Replace the following environment variables for your system
+export EC2_HOSTNAME=tig.link
+
+# Source function library
+. /etc/rc.d/init.d/functions
+
+# Source networking configuration
+[ -r /etc/sysconfig/network ] && . /etc/sysconfig/network
+
+# Check that networking is configured
+if [ "${NETWORKING}" = "no" ]; then
+  echo "Networking is not configured."
+  exit 1
+fi
+
+start() {
+
+  if [ -n "${EC2_HOSTNAME}" ]
+  then
+    hostname $EC2_HOSTNAME
+    unalias cp
+    cp -f /etc/sysconfig/network /etc/sysconfig/network.bak
+    sed -ie 's/^\(HOSTNAME\)=.*$/\1='$EC2_HOSTNAME'/' /etc/sysconfig/network
+  else
+    echo "No hostname passed."
+  fi
+
+}
+
+stop() {
+  echo "Nothing to do here"
+}
+
+restart() {
+  stop
+  start
+}
+
+# See how we were called.
+case "$1" in
+  start)
+    start
+    ;;
+  stop)
+    stop
+    ;;
+  restart)
+    restart
+    ;;
+  *)
+    echo $"Usage: $0 {start|stop|restart}"
+    exit 1
+esac
+
+exit $?
