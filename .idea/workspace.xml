@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4a646eb8-d76d-4e00-a145-888604156c20" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/tig-link" afterPath="$PROJECT_DIR$/bin/tig-link" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="4a646eb8-d76d-4e00-a145-888604156c20" name="Default" comment="" />
     <ignored path="tig-link.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -38,8 +34,8 @@
       <file leaf-file-name="tig-link" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/bin/tig-link">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.18249734">
-              <caret line="9" column="53" selection-start-line="9" selection-start-column="53" selection-end-line="9" selection-end-column="53" />
+            <state vertical-scroll-proportion="0.060832445">
+              <caret line="3" column="30" selection-start-line="3" selection-start-column="30" selection-end-line="3" selection-end-column="30" />
               <folding />
             </state>
           </provider>
@@ -261,8 +257,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/bin/tig-link">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.18249734">
-          <caret line="9" column="53" selection-start-line="9" selection-start-column="53" selection-end-line="9" selection-end-column="53" />
+        <state vertical-scroll-proportion="0.060832445">
+          <caret line="3" column="30" selection-start-line="3" selection-start-column="30" selection-end-line="3" selection-end-column="30" />
           <folding />
         </state>
       </provider>
