@@ -1,6 +1,15 @@
 #!/bin/bash
 
-app_root="$HOME/src/tig-link"
+local_root="$HOME/local"
+app_root="$local_root/tig-link"
+
+if [ ! -d "$app_root" ] ; then
+  echo "--tig-link doesn't exist at app root, creating...--"
+  mkdir -p $local_root
+  pushd $local_root
+    git clone https://github.com/cchamberlain/tig-link
+  popd
+fi
 
 pushd "$app_root"
   node index
