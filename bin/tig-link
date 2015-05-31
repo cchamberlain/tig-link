@@ -12,5 +12,5 @@ if [ ! -d "$app_root" ] ; then
 fi
 
 pushd "$app_root"
-  node index
+  node server
 popd
