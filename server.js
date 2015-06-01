@@ -1,6 +1,8 @@
 var restify = require('restify');
 var join = require('path').join;
 var mongodb = require('mongodb');
+var _ = require('lodash');
+
 var config=require(join(__dirname || process.cwd(), '.tig'));
 var mongoConnection=config.connections.mongo;
 var githubConfig=config.api.github;
@@ -34,17 +36,17 @@ server.post('/:username', function (req, res, next) {
     var githubClient = restify.createJsonClient('https://api.github.com');
     githubClient.basicAuth(username, password);
     authorizeGithub(githubClient, authBody, function(githubRes) {
+      console.log('--github response--');
+      console.dir(githubRes);
       var errors = [];
       if(githubRes.errors && githubRes.errors.length > 0) {
-        if(githubRes.errors[0].code === "already_exists") {
-          errors.push({
+        errors = _.map(githubRes.errors, function(n) {
+          return {
             "resource": "github",
-            "code": "already_exists"
-          })
-        }
+            "code": n.code
+          };
+        });
       }
-
-
 
       if(errors.length > 0) {
         res.send({
@@ -70,7 +72,10 @@ server.post('/:username', function (req, res, next) {
         };
 
         mongodb.MongoClient.connect(mongoConnection, function(err, db) {
-          if(err) throw err;
+          if(err)  {
+            console.log(err);
+            throw err;
+          }
 
           var collection = db.collection('users');
           collection.save(user, function (err) {
