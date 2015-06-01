@@ -1,6 +1,7 @@
 var restify = require('restify');
 var join = require('path').join;
 var config=require(join(__dirname || process.cwd(), '.tig'));
+var githubConfig=config.api.github;
 
 server = restify.createServer();
 server.use(restify.acceptParser(server.acceptable));
@@ -26,14 +27,11 @@ server.post('/:username', function (req, res, next) {
   var username=req.params.username;
   if(req.authorization && req.authorization.basic && req.authorization.basic.password) {
     var password=req.authorization.basic.password;
-    var note='tig access token for ' + username;
-    var body = {
-      "scopes": ["public_repo", "write:public_key"],
-      "note": note
-    };
+    var authBody=githubConfig.authorization;
+    authBody.note='tig access token for ' + username;
     var githubClient = restify.createJsonClient('https://api.github.com');
     githubClient.basicAuth(username, password);
-    authorizeGithub(githubClient, body, function(obj) {
+    authorizeGithub(githubClient, authBody, function(obj) {
       var errors = [];
       if(obj.errors && obj.errors.length > 0) {
         if(obj.errors[0].code === "already_exists") {
