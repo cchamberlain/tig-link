@@ -18,12 +18,17 @@ if ! hash mkdirp 2>/dev/null ; then
 fi
 
 if [ ! -d "$app_root" ] ; then
-  >&2 echo "--tig-link doesn't exist at app root, cloning...--"
+  >&2 echo "--Cloning tig-link...--"
   mkdirp "$local_root"
   pushd "$local_root" >/dev/null
     git clone https://github.com/cchamberlain/tig-link
   popd >/dev/null
 fi
+
+>&2 echo "--Updating tig-link...--"
+pushd "$app_root" >/dev/null
+  git pull origin master
+popd >/dev/null
 
 
 if [ ! -f "$app_config_path" ] ; then
