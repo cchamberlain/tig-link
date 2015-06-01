@@ -23,8 +23,10 @@
   "homepage": "https://github.com/cchamberlain/tig-link#readme",
   "scripts": {},
   "dependencies": {
+    "jwt-simple": "^0.3.0",
     "lodash": "^3.9.3",
     "mongodb": "^2.0.33",
+    "q": "^1.4.1",
     "restify": "^3.0.3",
     "restify-jwt": "^0.2.0"
   }
