@@ -1,6 +1,8 @@
 var restify = require('restify');
 var join = require('path').join;
+var mongodb = require('mongodb');
 var config=require(join(__dirname || process.cwd(), '.tig'));
+var mongoConnection=config.connections.mongo;
 var githubConfig=config.api.github;
 
 server = restify.createServer();
@@ -31,10 +33,10 @@ server.post('/:username', function (req, res, next) {
     authBody.note='tig access token for ' + username;
     var githubClient = restify.createJsonClient('https://api.github.com');
     githubClient.basicAuth(username, password);
-    authorizeGithub(githubClient, authBody, function(obj) {
+    authorizeGithub(githubClient, authBody, function(githubRes) {
       var errors = [];
-      if(obj.errors && obj.errors.length > 0) {
-        if(obj.errors[0].code === "already_exists") {
+      if(githubRes.errors && githubRes.errors.length > 0) {
+        if(githubRes.errors[0].code === "already_exists") {
           errors.push({
             "resource": "github",
             "code": "already_exists"
@@ -42,16 +44,43 @@ server.post('/:username', function (req, res, next) {
         }
       }
 
+
+
       if(errors.length > 0) {
         res.send({
           "message": "Authorization Failed",
           "errors": errors
         });
+        next();
       }
       else {
-        res.send(obj);
+        var ObjectID=mongodb.ObjectID;
+        var user = {
+          "_id": new ObjectID(username),
+          "username": username,
+          "github_token": githubRes.token,
+          "github_hashed_token": githubRes.hashed_token,
+          "github_token_last_eight": githubRes.token_last_eight,
+          "github_note": githubRes.note,
+          "github_note_url": githubRes.note_url,
+          "github_created": githubRes.created_at,
+          "github_updated": githubRes.updated_at,
+          "github_scopes": githubRes.scopes,
+          "github_fingerprint": githubRes.fingerprint
+        };
+
+        mongodb.MongoClient.connect(mongoConnection, function(err, db) {
+          if(err) throw err;
+
+          var collection = db.collection('users');
+          collection.save(user, function (err) {
+            if(err) throw err;
+
+            res.send(githubRes);
+            next();
+          });
+        });
       }
-      next();
     });
 
     //res.send('basic auth: ' + username + ':' + password);
