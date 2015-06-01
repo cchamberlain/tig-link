@@ -55,7 +55,7 @@ if [ ! -f "$app_config_path" ] ; then
   read mongo_url
 
   >&2 echo "--Initializing $app_config_path--"
-  cat "$app_config_default_path" | -e "s/<github_client_id>/$github_client_id/" -e "s/<github_client_secret>/$github_client_secret/" -e "s/<mongo_user>/$mongo_user/" -e "s/<mongo_password>/$mongo_password/" -e "s/<mongo_url>/$mongo_url/" >"$app_config_path"
+  cat "$app_config_default_path" | sed -e "s/<github_client_id>/$github_client_id/" -e "s/<github_client_secret>/$github_client_secret/" -e "s/<mongo_user>/$mongo_user/" -e "s/<mongo_password>/$mongo_password/" -e "s/<mongo_url>/$mongo_url/" >"$app_config_path"
 fi
 
 pushd "$app_root" >/dev/null
