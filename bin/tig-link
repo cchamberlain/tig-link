@@ -37,6 +37,7 @@ fi
 >&2 echo "--Updating tig-link...--"
 pushd "$app_root" >/dev/null
   git pull origin master
+  npm install --production
 popd >/dev/null
 
 
