@@ -21,5 +21,9 @@
     "url": "https://github.com/cchamberlain/tig-link/issues"
   },
   "homepage": "https://github.com/cchamberlain/tig-link#readme",
-  "scripts": {}
+  "scripts": {},
+  "dependencies": {
+    "restify": "^3.0.3",
+    "restify-jwt": "^0.2.0"
+  }
 }

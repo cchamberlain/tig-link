@@ -10,7 +10,7 @@
 USER="cchamberlain"
 
 NODE_ENV="production"
-DAEMON="/usr/local/node/bin/node"
+DAEMON="/usr/local/node/node"
 ROOT_DIR="/home/cchamberlain/local/tig-link"
 
 SERVER="$ROOT_DIR/server.js"

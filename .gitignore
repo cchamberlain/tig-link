@@ -2,6 +2,7 @@
 logs
 *.log
 .idea
+.tig.json
 
 # Runtime data
 pids

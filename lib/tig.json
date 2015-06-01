@@ -1,0 +1,17 @@
+{
+  "connections": {
+    "mongo": "mongodb://<mongo_user>:<mongo_password>@<mongo_url>/tig"
+  },
+  "api": {
+    "github": {
+      "authorization": {
+        "note": "tig access token for <username>",
+        "note_url": "http://tig.sh",
+        "fingerprint": "tig-link",
+        "scopes": ["repo", "write:public_key"],
+        "client_id": "<github_client_id>",
+        "client_secret": "<github_client_secret>"
+      }
+    }
+  }
+}
