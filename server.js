@@ -1,6 +1,5 @@
 var restify = require('restify');
 var join = require('path').join;
-console.dir(process);
 var config=require(join(__dirname || process.cwd(), '.tig'));
 
 server = restify.createServer();
