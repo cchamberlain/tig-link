@@ -34,14 +34,15 @@ if [ ! -d "$app_root" ] ; then
   popd >/dev/null
 fi
 
->&2 echo "--Updating tig-link...--"
 pushd "$app_root" >/dev/null
+  >&2 echo "--Updating tig-link...--"
   git pull origin master
+  >&2 echo "--Installing npm production dependencies...--"
   npm install --production
 popd >/dev/null
 
 
-if [ ! -f "$app_config_path" ] && [ cat "$app_config_path" != "" ] ; then
+if [ ! -f "$app_config_path" ] || [ cat "$app_config_path" == "" ] ; then
   >&2 echo "--First time setup--"
   >&2 echo -n "GitHub Client Id:"
   read github_client_id
