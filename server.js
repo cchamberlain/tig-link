@@ -1,6 +1,7 @@
 var restify = require('restify');
 var join = require('path').join;
-var config=require(join(process.env.USERPROFILE || process.env.HOME, '.tig'));
+console.dir(process);
+var config=require(join(__dirname || process.cwd(), '.tig'));
 
 server = restify.createServer();
 server.use(restify.acceptParser(server.acceptable));
