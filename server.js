@@ -23,22 +23,16 @@ server.get('/', restify.serveStatic({
 }));
 
 server.post('/', function (req, res, next) {
-  var username=req.params.username;
-  if(req.authorization && req.authorization.basic && req.authorization.basic.password) {
-    var password=req.authorization.basic.password;
-    identityApi.authorize({
-      "username": username,
-      "password": password
-    }).then(function(identity) {
+  var auth = require('./lib/inspectors/auth')(req.authorization);
+  if(auth) {
+    identityApi.authorize(auth).then(function(identity) {
       res.send(identity);
       next();
     }, function(err) {
-      console.log(err);
-      res.send(err);
+      next(new restify.InvalidCredentialsError(err));
     });
-  }
-  else {
-    // look for token
+  } else {
+    next(new restify.UnauthorizedError("No authorization header set"));
   }
 });
 
