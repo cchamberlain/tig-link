@@ -4,7 +4,11 @@ var restify = require('restify');
 var _ = require('lodash');
 var join = require('path').join;
 
-var config=require(join(process.cwd(), '.tig'));
+var TIG_ROOT=process.env.TIG_HOME || join(process.env.HOME || process.env.USERPROFILE, ".tig");
+var TIGRC_PATH=join(TIG_ROOT, "tigrc");
+var TIG_LINK_PATH=join(TIG_ROOT, "tig-link.json");
+
+var config=require(TIG_LINK_PATH);
 
 
 var server = restify.createServer();
