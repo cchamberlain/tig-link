@@ -1,6 +1,6 @@
 {
   "name": "tig-link",
-  "version": "0.1.36",
+  "version": "0.1.37",
   "description": "The node.js web counterpart to tig CLI tools.",
   "main": "server.js",
   "directories": {
