@@ -4,7 +4,7 @@
     "secret": "<jwt_secret>"
   },
   "connections": {
-    "mongo": "<mongo_connection>"
+    "mongo": "mongodb://<mongo_credentials>@<mongo_url>/tig"
   },
   "api": {
     "github": {
