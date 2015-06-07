@@ -1,7 +1,6 @@
 'use strict';
 
-var paths = require('./etc/paths');
-var config=require(paths.TIG_LINK_JSON_PATH);
+var restify = require('restify');
 
 var server = restify.createServer();
 server.use(restify.acceptParser(server.acceptable));
@@ -14,5 +13,5 @@ server.use(restify.bodyParser({ mapParams: false }));
 
 require('./lib')(server);
 
-server.listen(config.port);
-console.log('tig-link started on ' + config.port + '.');
+server.listen(server.settings.config.port);
+console.log('tig-link started on ' + server.settings.config.port + '.');
